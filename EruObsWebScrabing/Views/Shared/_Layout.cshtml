@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Öğrenci Paneli</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container-fluid">
+        <!-- Sidebar Başlangıç -->
+        <div class="row">
+            <div class="col-md-3 bg-dark text-white p-4">
+                <h2><i class="fas fa-user-circle"></i> Öğrenci Paneli</h2>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#anasayfa"><i class="fas fa-home"></i> Anasayfa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#notlarim"><i class="fas fa-file-alt"></i> Notlarım</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#bilgilerim"><i class="fas fa-id-card"></i> Bilgilerim</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#dersprogrami"><i class="fas fa-calendar-alt"></i> Ders Programım</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Sidebar Bitiş -->
+            <!-- İçerik Başlangıç -->
+            <div class="col-md-9 p-4">
+                <!-- Anasayfa Section -->
+                <div id="anasayfa" class="section">
+                    <h3><i class="fas fa-home"></i> Anasayfa</h3>
+                    <p>Hoş geldiniz! Buradan notlarınızı, bilgilerinizi ve ders programınızı kolayca takip edebilirsiniz.</p>
+                    <div class="alert alert-info">Bugün 3 dersiniz var.</div>
+                </div>
+                @RenderBody()
+                <!-- Notlarım Section -->
+                <div id="notlarim" class="section">
+                    <h3><i class="fas fa-file-alt"></i> Notlarım</h3>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Ders</th>
+                                <th>Vize</th>
+                                <th>Final</th>
+                                <th>Ortalama</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Matematik</td>
+                                <td>75</td>
+                                <td>85</td>
+                                <td>80</td>
+                            </tr>
+                            <tr>
+                                <td>Fizik</td>
+                                <td>60</td>
+                                <td>70</td>
+                                <td>65</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Bilgilerim Section -->
+                <div id="bilgilerim" class="section">
+                    <h3><i class="fas fa-id-card"></i> Bilgilerim</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Ad:</strong> Abdullah</li>
+                        <li class="list-group-item"><strong>Öğrenci Numarası:</strong> 123456</li>
+                        <li class="list-group-item"><strong>Email:</strong> abdullah@example.com</li>
+                    </ul>
+                </div>
+
+                <!-- Ders Programım Section -->
+                <div id="dersprogrami" class="section">
+                    <h3><i class="fas fa-calendar-alt"></i> Ders Programım</h3>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Ders</th>
+                                <th>Gün</th>
+                                <th>Saat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Matematik</td>
+                                <td>Pazartesi</td>
+                                <td>09:00 - 11:00</td>
+                            </tr>
+                            <tr>
+                                <td>Fizik</td>
+                                <td>Salı</td>
+                                <td>11:00 - 13:00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- İçerik Bitiş -->
+        </div>
+    </div>
+
+    <!-- Bootstrap JS ve bağımlılıkları -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

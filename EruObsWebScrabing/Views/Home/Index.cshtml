@@ -1,0 +1,200 @@
+﻿@{
+    Layout = null;
+}
+
+@using EruObsWebScrabing.ScrabingModels
+@model MainViewModel
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Öğrenci Bilgi Sistemi</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f3f7;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .header {
+            background-color: #003366;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header-logo {
+            max-height: 80px;
+        }
+
+        .official-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sidebar {
+            background-color: #ffffff;
+            border-right: 1px solid #e0e0e0;
+            height: calc(100vh - 120px);
+            position: sticky;
+            top: 120px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+        }
+
+            .sidebar-menu li {
+                padding: 12px 20px;
+                border-bottom: 1px solid #f0f0f0;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+                .sidebar-menu li:hover {
+                    background-color: #f0f0f0;
+                }
+
+        .content-card {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 0;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .content-header {
+            background-color: #f0f0f0;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 15px;
+            font-weight: bold;
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        .official-stamp {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 150px;
+            opacity: 0.7;
+        }
+
+        .badge-official {
+            background-color: #003366;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="header text-center position-relative">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between">
+                <img src="/eru.png" alt="Erü  Logo" class="header-logo">
+                <div>
+                    <h2 class="official-title">Erciyes Üniversitesi Öğrenci Bilgi Sistemi</h2>
+                    <p class="mb-0">Elektronik Portal</p>
+                </div>
+                <div>
+                    <i class="fas fa-user-circle fa-3x text-white"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid d-flex justify-content-center align-items-center" style="height: 80vh;">
+ 
+
+            <div class="col-md-10 pt-4">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="content-card">
+                            <div class="content-header">
+                                <i class="fas fa-id-card me-2"></i>Öğrenci Bilgileri
+                            </div>
+                            <div class="p-3">
+                                <p><strong>Ad Soyad:</strong> @Model.adiSoyadi</p>
+                                <p><strong>Öğrenci No:</strong> @Model.ogrenciNo</p>
+                                <p><strong>Bölüm:</strong> @Model.bolumAdi</p>
+                                <p><strong>Sınıf:</strong> @Model.sinifSeneGano</p>
+                                <p><strong>Danışman:</strong> @Model.danisman</p>
+                                <span class="badge badge-official">Aktif Öğrenci</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="content-card">
+                            <div class="content-header">
+                                <i class="fas fa-table me-2"></i>Not Çizelgesi
+                            </div>
+                            <table class="table table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Ders Kodu</th>
+                                        <th>Ders Adı</th>
+                                        <th>Vize</th>
+                                        <th>Final</th>
+                                        <th>Büt</th>
+                                        <th>Ortalama</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.GetLessonLists)
+                                    {
+                                        <tr>
+                                            <td>@item.code</td>
+                                            <td>@item.dersAdi</td>
+                                            <td>@item.vizeNotu</td>
+                                            <td>@item.finalNotu</td>
+                                            <td>@item.but</td>
+                                            <td>@item.ort</td>
+                                        </tr>
+
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="content-card">
+                            <div class="content-header">
+                                <i class="fas fa-chart-bar me-2"></i>Akademik Performans
+                            </div>
+                            <div class="p-3 d-flex justify-content-around">
+                                <div class="text-center">
+                                    <h5>GPA</h5>
+                                    <span class="badge badge-official">@Model.sinifSeneGano</span>
+                                </div>
+                                <div class="text-center">
+                                    <h5>Toplam Kredi</h5>
+                                    <span class="badge badge-official">120</span>
+                                </div>
+                                <div class="text-center">
+                                    <h5>Mezuniyet Durumu</h5>
+                                    <span class="badge badge-official">@Model.sinifSeneGano</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+      
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
