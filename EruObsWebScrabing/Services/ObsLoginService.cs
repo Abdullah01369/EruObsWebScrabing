@@ -35,9 +35,10 @@ namespace EruObsWebScrabing.Services
             return page.GetText().Trim();
         }
 
-        public  async Task<List<LessonList>> GetScores()
+        public async Task<List<LessonList>> GetScores()
         {
-            
+
+
             var response = await _httpClient.GetAsync(_LessonUrl);
             var html = await response.Content.ReadAsStringAsync();
 
@@ -52,18 +53,18 @@ namespace EruObsWebScrabing.Services
                 var cells = ders.SelectNodes("td");
                 if (cells != null && cells.Count > 5)
                 {
-                    string derscode = cells[0].InnerText.Trim(); 
-                    string dersAdi = cells[1].InnerText.Trim();  
-                    string vize = cells[6].InnerText.Trim();     
-                    string final = cells[9].InnerText.Trim();    
-                    string but = cells[10].InnerText.Trim();     
-                    string ort = cells[11].InnerText.Trim();      
+                    string derscode = cells[0].InnerText.Trim();
+                    string dersAdi = cells[1].InnerText.Trim();
+                    string vize = cells[6].InnerText.Trim();
+                    string final = cells[9].InnerText.Trim();
+                    string but = cells[10].InnerText.Trim();
+                    string ort = cells[11].InnerText.Trim();
 
-                    LessonList.AddLesson(dersAdi, final, vize,but,derscode,ort);
-              
-                    
+                    LessonList.AddLesson(dersAdi, final, vize, but, derscode, ort);
+
+
                 }
-              
+
             }
 
 
@@ -108,10 +109,16 @@ namespace EruObsWebScrabing.Services
                 string imgFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "img");
                 if (!Directory.Exists(imgFolderPath))
                 {
+
                     Directory.CreateDirectory(imgFolderPath);
                 }
                 var outp = Guid.NewGuid();
+
+
                 string imagePath = Path.Combine(imgFolderPath, $"{outp}.jpg");
+
+
+
                 using (var fileStream = new FileStream(imagePath, FileMode.Create, FileAccess.Write, FileShare.None))
                 {
                     byte[] imageData = await resp.Content.ReadAsByteArrayAsync();
@@ -119,9 +126,9 @@ namespace EruObsWebScrabing.Services
                     fileStream.Dispose();
                     fileStream.Close();
                 }
-              
-                
-                 Console.WriteLine($" CAPTCHA resmi kaydedildi: {imagePath}");
+
+
+                Console.WriteLine($" CAPTCHA resmi kaydedildi: {imagePath}");
                 string imagePathForPrep = Path.Combine(imgFolderPath, "output.jpg");
 
 
@@ -144,7 +151,7 @@ namespace EruObsWebScrabing.Services
 
         public async Task<string> Login(StudentLoginModel loginModel)
         {
-         
+
             var content = new FormUrlEncodedContent(new[]
             {
             new KeyValuePair<string, string>("__VIEWSTATE", loginModel.__VIEWSTATE),
@@ -179,7 +186,31 @@ namespace EruObsWebScrabing.Services
 
         }
 
+        public void RemoveImageFolder()
+        {
+            string imgFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "img");
 
+            if (Directory.Exists(imgFolderPath))
+            {
+
+                foreach (string file in Directory.GetFiles(imgFolderPath))
+                {
+                    try
+                    {
+                        File.Delete(file);
+                    }
+                    catch (IOException)
+                    {
+                        continue;
+                        
+                    }
+
+                   
+                }
+
+
+            }
+        }
     }
 }
 

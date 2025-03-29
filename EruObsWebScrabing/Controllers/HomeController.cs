@@ -55,6 +55,7 @@ namespace EruObsWebScrabing.Controllers
 
             var scores = await _obsLoginService.GetScores();
 
+            _obsLoginService.RemoveImageFolder();
 
             return RedirectToAction(nameof(Index));
         }
@@ -64,7 +65,7 @@ namespace EruObsWebScrabing.Controllers
             var doc = new HtmlDocument();
             doc.LoadHtml(MainPageHtml);
 
-          var val=  LessonList.GetLessons();
+            var val = LessonList.GetLessons();
 
 
 
@@ -90,15 +91,6 @@ namespace EruObsWebScrabing.Controllers
             return View(mainViewModel);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }

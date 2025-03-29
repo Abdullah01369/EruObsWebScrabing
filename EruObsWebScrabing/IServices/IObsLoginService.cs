@@ -12,6 +12,8 @@ namespace EruObsWebScrabing.IServices
         Task<string> Login(StudentLoginModel loginModel);
      
         Task<List<LessonList>> GetScores();
+        void RemoveImageFolder();
+
 
 
 
