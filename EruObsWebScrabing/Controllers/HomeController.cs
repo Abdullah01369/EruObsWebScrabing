@@ -48,6 +48,11 @@ namespace EruObsWebScrabing.Controllers
                     {
                         status = false;
                     }
+                    if (res.Contains("Giriþ baþarýsýz!"))
+                    {
+                        ViewBag.Error = "Numara ya da þifre yanlýþ!";
+                        return View();
+                    }
                 }
             }
 
